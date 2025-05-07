@@ -6,12 +6,6 @@ pipeline {
         }
     }
     stages {
-        stage('Clean Workspace') {
-            steps {
-                // Delete everything—including the old target/ directory
-                deleteDir()
-            }
-        }
         stage('Checkout Code') {
             steps {
                 git credentialsId: 'githubcreds', url: 'https://github.com/Nisarg153/java-maven-sonar-argocd-helm-k8s.git'
