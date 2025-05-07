@@ -5,8 +5,12 @@ pipeline {
             args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
         }
     }
-
     stages {
+        stage('Clean Workspace') {
+          steps {
+            deleteDir()          // built-in Pipeline step
+          }
+     }
         stage('Checkout Code') {
             steps {
                 git credentialsId: 'githubcreds', url: 'https://github.com/Nisarg153/java-maven-sonar-argocd-helm-k8s'
