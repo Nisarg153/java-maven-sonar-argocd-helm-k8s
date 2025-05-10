@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: nisarg153/ultimate-cicd:188
+        image: nisarg153/ultimate-cicd:189
         ports:
         - name: app-port
           containerPort: 8081
