@@ -1,6 +1,69 @@
 # Jenkins Pipeline for Java based application using Maven, SonarQube, Argo CD, Helm and Kubernetes
 
+## About This Project
+
+This project implements a complete CI/CD pipeline for a Java Spring Boot application. The pipeline automates code building, testing, static code analysis, containerization, and deployment to a Kubernetes cluster using GitOps principles.
+
+I built this to deepen my hands-on understanding of how Jenkins, SonarQube, Docker, ArgoCD, and Kubernetes work together in a real deployment workflow. The Jenkinsfile was written and customized by me to fit my infrastructure setup.
+
+> **Inspired by:** [Abhishek Veeramalla's DevOps pipeline tutorial](https://www.youtube.com/watch?v=JGQI5pkK82w) — I followed the core concepts and then adapted the pipeline configuration, infrastructure choices, and deployment approach to my own environment.
+
+## Architecture
+
 ![Screenshot 2023-03-28 at 9 38 09 PM](https://user-images.githubusercontent.com/43399466/228301952-abc02ca2-9942-4a67-8293-f76647b6f9d8.png)
+
+## Pipeline Stages
+
+| Stage | Tool | What It Does |
+|-------|------|--------------|
+| **Checkout** | Git | Pulls latest source code from GitHub |
+| **Build** | Maven | Compiles the Java Spring Boot application |
+| **Test** | JUnit | Runs unit tests |
+| **Static Analysis** | SonarQube | Checks code quality, bugs, vulnerabilities, and code smells |
+| **Build & Push Image** | Docker | Builds container image and pushes to DockerHub |
+| **Update Manifests** | Shell/Git | Updates the Kubernetes deployment YAML with the new image tag |
+| **Deploy** | ArgoCD | Detects manifest changes and syncs the deployment to the K8s cluster |
+
+---
+## Infrastructure Setup
+
+| Component | Where It Runs |
+|-----------|---------------|
+| Jenkins Server | AWS EC2 (Ubuntu) |
+| SonarQube | Docker container on EC2 |
+| Docker Registry | DockerHub |
+| Kubernetes Cluster | Minikube (local) |
+| ArgoCD | Deployed on Minikube via ArgoCD Operator |
+
+---
+
+## Tech Stack
+
+- **Language:** Java (Spring Boot)
+- **Build Tool:** Maven
+- **CI Server:** Jenkins (with custom Jenkinsfile)
+- **Code Quality:** SonarQube
+- **Containerization:** Docker
+- **Container Registry:** DockerHub
+- **GitOps:** ArgoCD (Operator-based install)
+- **Orchestration:** Kubernetes (Minikube)
+- **Manifests:** Kubernetes YAML (deployment + service)
+- **Monitoring:** Prometheus & Grafana (configuration included)
+
+---
+
+## Project Structure
+
+```
+├── spring-boot-app/              # Java Spring Boot application source code
+│   ├── src/                      # Application source and tests
+│   ├── pom.xml                   # Maven build configuration
+│   ├── Dockerfile                # Multi-stage Docker build
+│   └── JenkinsFile               # CI/CD pipeline definition (customized)
+├── spring-boot-app-manifests/    # Kubernetes deployment & service YAML
+├── Argo CD/                      # ArgoCD application configuration
+├── monitoring/                   # Prometheus & Grafana setup files
+└── README.md
 
 
 Here are the step-by-step details to set up an end-to-end Jenkins pipeline for a Java application using SonarQube, Argo CD, Helm, and Kubernetes:
