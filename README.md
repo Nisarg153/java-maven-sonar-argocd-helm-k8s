@@ -65,6 +65,14 @@ I built this to deepen my hands-on understanding of how Jenkins, SonarQube, Dock
 ├── monitoring/                   # Prometheus & Grafana setup files
 └── README.md
 
+## What I Built & Customized
+
+- **Jenkinsfile:** Wrote and modified the pipeline stages to work with my EC2 + Minikube setup, including SonarQube integration, Docker build/push, and automated manifest updates via Git.
+- **Infrastructure:** Set up Jenkins on AWS EC2, ran SonarQube as a Docker container, and configured ArgoCD on Minikube using the ArgoCD Operator.
+- **GitOps Workflow:** Configured ArgoCD to watch the `spring-boot-app-manifests/` directory and automatically sync deployments when the image tag changes.
+- **End-to-End Verification:** Successfully deployed the Spring Boot application to Kubernetes and verified it was running and accessible.
+
+---
 
 Here are the step-by-step details to set up an end-to-end Jenkins pipeline for a Java application using SonarQube, Argo CD, Helm, and Kubernetes:
 
@@ -123,3 +131,13 @@ Steps:
        7.2 Monitor the pipeline stages and fix any issues that arise.
 
 This end-to-end Jenkins pipeline will automate the entire CI/CD process for a Java application, from code checkout to production deployment, using popular tools like SonarQube, Argo CD, Helm, and Kubernetes.
+
+## Key Learnings
+
+- **ArgoCD setup** was the most challenging part — understanding how the ArgoCD Operator works, configuring it to watch a specific path in the repo, and troubleshooting sync issues.
+- **GitOps model** where Jenkins handles CI (build, test, push) and ArgoCD handles CD (deploy) provides a clean separation of concerns.
+- **SonarQube integration** in the pipeline helped catch code quality issues early before the Docker image is built.
+- Learned how **Jenkins updates Git manifests** with new image tags, which then triggers ArgoCD's sync — closing the full CI/CD loop.
+
+---
+
