@@ -64,7 +64,7 @@ I built this to deepen my hands-on understanding of how Jenkins, SonarQube, Dock
 ├── Argo CD/                      # ArgoCD application configuration
 ├── monitoring/                   # Prometheus & Grafana setup files
 └── README.md
-
+```
 ## What I Built & Customized
 
 - **Jenkinsfile:** Wrote and modified the pipeline stages to work with my EC2 + Minikube setup, including SonarQube integration, Docker build/push, and automated manifest updates via Git.
